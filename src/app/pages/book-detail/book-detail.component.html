@@ -1,0 +1,288 @@
+<div style=" padding-top: 56px;background-color: #F8F9FE;">
+    <!-- <div class="sidenav">
+        <a href="#about" style="color: white;">About</a>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+      </div> -->
+    <div class="container">
+        <div *ngIf="book!=null" class="row" style=" margin-top: 56px;">
+
+            <div class="col-lg-3 ">
+
+                <img style="height: 350px;width: 250px;box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;" [src]="book.image"
+                    alt="">
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+                <div class="big_title">
+                    {{book.name}}
+                </div>
+
+                <span class="author" [routerLink]="['/authorDetails/'+book.auteur.id]"
+                    routerLinkActive="router-link-active">
+                    {{book.auteur.username}}
+                </span>
+
+                <span class="card-text" style="margin-right: 10px;">(Author)</span>
+
+                <span>
+                    <button *ngIf="!followed" (click)="followAuyhor(book.auteur.id)" type="button" class="btn btn-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="color: blue; margin-right:6px" width="18"
+                            height="18" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                            <path
+                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                        </svg>follow</button></span>
+
+
+
+
+                <svg *ngIf="followed" style="color: blue; margin-right:6px" xmlns="http://www.w3.org/2000/svg"
+                    width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                </svg>
+
+                <div *ngFor="let item of userbooks">
+                    <div *ngIf="item.id==book.id">
+                        <div style="font-size: 25px; margin-top: 10px;">format :</div>
+                        <a [href]="book.contenu" download="ss">
+                            <button type="button" class="btn btn-outline-info" style="margin: 10px;">Read book</button>
+                        </a>
+                        
+
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px;" class="text-muted">
+                    <ngb-rating [title]="book.rating.value" style="color:#FEDA03;font-size: 27px;" [max]="5"
+                        [rate]="book.rating.value" [readonly]="true"></ngb-rating>
+                    <span style="margin-right: 10px;">Rated : {{book.rating.nbrRates}} times</span>
+                    <span style="text-decoration: underline;cursor: pointer;" (click)="show_rate= !show_rate">rate
+                        it</span>
+
+                    <span *ngIf="show_rate"
+                        style="margin: 20px;background-color: #EA51FB;padding: 20px;border-radius: 10px;"
+                        class="text-muted">
+                        <ngb-rating style="color:#FEDA03;font-size: 27px;" [max]="5" [(rate)]="rating"
+                            [readonly]="false" (click)="rate(book.id)">
+                        </ngb-rating>
+                    </span>
+                </div>
+
+                <div style="margin-top: 15px;margin-bottom:15px;display: flex;position: relative;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" color="#1FA5A3"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <div class="available">available</div>
+                </div>
+                
+                <div *ngIf="showAdd">
+                    <button type="button" class="btn btn-danger" (click)="addToCart(book.id)" data-toggle="modal"
+                        data-target="#exampleModalCenter"
+                        style="border-radius: 20px;font-size: 20px;margin-right: 10px;"><i class="fa fa-shopping-bag"
+                            style="margin: 5px;"></i>add to cart</button>
+
+                    <button type="button" class="btn btn-outline-warning" style="border-radius: 20px;font-size: 20px;"
+                        (click)="addToWishList(book.id)">Add to wish List</button>
+                    </div>
+
+
+                <!-- Modal -->
+                <div *ngIf="book!=null && userService.user" class="modal fade" id="exampleModalCenter" tabindex="-1"
+                    role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="row" style="padding: 30px;">
+                                <div class="col-5">
+                                    <img height="230px" width="150px" [src]="book.image">
+                                </div>
+                                <div class="col-6" style="margin-left: 30px;">
+                                    <div class="big_title"> {{book.name}}</div>
+                                    <div class="card-text" style=" overflow: hidden; text-overflow: ellipsis; display: -webkit-box;-webkit-line-clamp: 7;     
+                                    -webkit-box-orient: vertical;"> {{book.description}}</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-warning " routerLink="/home"
+                                style="border-radius: 20px;font-size: 20px;width: 440px;margin-left: 30px;margin-bottom: 20px;"
+                                data-dismiss="modal">Keep shopping</button>
+
+                            <button type="button" class="btn btn-outline-warning " [routerLink]="['/cart']"
+                                routerLinkActive="router-link-active" data-dismiss="modal"
+                                style="border-radius: 20px;font-size: 20px;width: 440px;margin-left: 30px;margin-bottom: 20px;">
+                                Check out <span *ngIf="book_service.cart_books">({{
+                                    book_service.cart_books.length}})</span></button>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="descrition">Description</div>
+                <div class="card-text">{{book.description}}</div>
+
+
+                <div class="descrition">Product details</div>
+
+                <div>
+                    <span class="card-text">Price : </span>
+                    <span style="color: red;">${{book.price}}</span>
+                </div>
+
+                <div>
+                    <span class="card-text">Publisher : </span>
+                    <span style="color: red;">Central Recovery Press</span>
+                </div>
+
+
+                <div>
+                    <span class="card-text">Publish date : </span>
+                    <span style="color: red;">
+                        September 19, 2017</span>
+                </div>
+
+                <div>
+                    <span class="card-text">Language: </span>
+                    <span style="color: red;">
+                        English</span>
+                </div>
+
+
+
+
+                <div class="descrition">About the author </div>
+
+                <div class="card-text" style="padding-bottom: 80px;">Resmaa Menakem, MSW, LICSW, SEP, has appeared on
+                    both
+                    The Oprah Winfrey Show and Dr. Phil as an expert on conflict and violence. He has served as director
+                    of
+                    counseling services for the Tubman Family Alliance; as behavioral health director for African
+                    American
+                    Family Services in Minneapolis; as a domestic violence counselor for Wilder Foundation; as a
+                    certified
+                    Military and Family Life Consultant for the U.S. Armed Forces; as a trauma consultant for the
+                    Minneapolis Public Schools; and as a Cultural Somatics consultant for the Minneapolis Police
+                    Department.
+                    As a Community Care Counselor, he managed the wellness and counseling services for civilians on
+                    fifty-three US military bases in Afghanistan. Resmaa studied and trained at Peter Levine's Somatic
+                    Experiencing Trauma Institute, as well as with Dr. David Schnarch (author of the bestselling
+                    Passionate
+                    Marriage) and Bessel van der Kolk, MD (author of the bestselling The Body Keeps the Score). He
+                    currently
+                    teaches workshops on Cultural Somatics for audiences of African Americans, European Americans, and
+                    police officers. He is also a therapist in private practice. <div>
+
+
+
+
+                        <div style="background-color: #F8F9FE;">
+                            <div class=" mt-5 mb-5">
+                                <div class="d-flex justify-content-center row">
+                                    <div class="d-flex flex-column col-md-12">
+                                        <div
+                                            class="d-flex flex-row align-items-center text-left comment-top p-2  border-bottom px-4">
+
+                                            <div class="d-flex flex-column ml-3">
+                                                <div class="d-flex flex-row post-title">
+                                                    <h5 class="big_title"> comments section </h5>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-row align-items-center align-content-center post-title">
+                                                    <span class="mr-2 comments">{{book.comments.length}}
+                                                        comments&nbsp;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="coment-bottom  p-2 px-4">
+                                            <div class="d-flex flex-row add-comment-section mt-4 mb-4"><img
+                                                    class="img-fluid img-responsive rounded-circle mr-2"
+                                                    src="https://i.imgur.com/qdiP4DB.jpg" width="38">
+                                                <input type="text" class="form-control mr-3" placeholder="Add comment"
+                                                    [(ngModel)]="content"><button class="btn btn-primary" type="button"
+                                                    (click)="sendComment()">Comment</button>
+                                            </div>
+
+
+                                            <div class="commented-section mt-2"
+                                                *ngFor="let comment of book.comments;let i=index">
+                                                <div class="d-flex flex-row align-items-center commented-user"
+                                                    style="font-family: Gill Sans, sans-serif">
+                                                    <h5 class="mr-2"> {{comment.user.username}}</h5><span
+                                                        class="dot mb-1"></span><span class="mb-1 ml-2">{{calculateDiff(comment.updatedAt)}} 
+                                                        ago</span>
+                                                </div>
+                                                <div *ngIf="editIndex==i">
+                                                    <input type="text" class="form-control mr-3"
+                                                        placeholder="Add comment" [(ngModel)]="editedContent">
+                                                    <div><span (click)="editComment(comment.id)"
+                                                            style="color: blue;margin-right: 7px;cursor: pointer;">save
+                                                            changes</span> <small style="color: red;cursor: pointer;"
+                                                            (click)="editIndex=null"> delete changes
+                                                        </small></div>
+                                                </div>
+
+                                                <div *ngIf=" editIndex!=i">
+
+                                                    <span class="comment-text-sm"
+                                                        style="margin-right: 10px;">{{comment.contenu}}</span>
+                                                    <small> {{helper.formatDateTime(comment.createdAt) }}</small>
+
+                                                    <button *ngIf="comment.user.id==userService.user.client.id"
+                                                        data-toggle="dropdown" class="dropdownt">
+                                                        <a style="margin-top:-5px ;">
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </a>
+
+                                                    </button>
+                                                    <span style="position: relative;"
+                                                        *ngIf="book.auteur.id==userService.user.client.id">
+                                                        <i (click)="deleteComment(comment.id,i)"
+                                                            style="font-size: 30px;color: red;cursor: pointer;position: absolute;top:-5px"
+                                                            class="ni ni-fat-remove"></i>
+                                                    </span>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item"
+                                                            (click)="showEditComment(i,comment.contenu)">edit</a>
+                                                        <a class="dropdown-item"
+                                                            (click)="deleteComment(comment.id,i)">delete </a>
+
+                                                    </div>
+                                                </div>
+                                            <div class="reply-section">
+                                                    <div class="d-flex flex-row align-items-center voting-icons"><i
+                                                            class="fa fa-sort-up fa-2x mt-3 hit-voting"></i><i
+                                                            class="fa fa-sort-down fa-2x mb-3 hit-voting"></i><span
+                                                            class="ml-2">25</span><span class="dot ml-2"></span>
+                                                        <h6 class="ml-2 mt-1">Reply</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- /.col-lg-9 -->
+
+
+
+                </div>
+
+            </div>
+        </div>

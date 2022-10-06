@@ -1,0 +1,105 @@
+<nav *ngIf="helper.shownav" class="navbar navbar-expand-lg navbar-dark  fixed-top " style="background-color:#ff8474;">
+    <div class="container">
+        <a class="navbar-brand" href="#">Liblo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li  routerLink="home" class="nav-item active">
+                    <a class="nav-link" >Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item " *ngIf=" this.userService.user && this.userService.user.client.role=='auteur'">
+                    <a routerLink="addBook" class="nav-link" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                            <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                          </svg>
+                    </a>
+                </li>
+
+                
+               
+                <li  class=" dropdown nav-item">
+                    <a class="nav-link"  data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                      </svg></a>
+
+                      <ul class="dropdown-menu cat-List1">
+                        <li routerLink="profile">
+                            <p class="m-top-10" (click)="goToProfile()">Profile</p>
+                        </li>
+                        <li>
+                         
+                            <p class="m-top-10"  (click)="goToWishList()" *ngIf=" this.userService.user && this.userService.user.client.role=='client'" >Wish List</p>
+                        </li>
+                        <li>
+                         
+                            <p class="m-top-10"(click)="goTo()">Log out</p>
+                        </li>
+                       
+                    </ul>
+                </li>
+                
+                    <li *ngIf="this.userService.user && this.userService.user.client.role=='client'" class="dropdown nav-item">
+                        <a  class="dropdown-toggle nav-link" data-toggle="dropdown" >
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge"  *ngIf="book_service.cart_books">{{ book_service.cart_books.length}}</span>
+                        </a>
+                        <ul class="dropdown-menu cart-list">
+                            <li *ngFor="let item of book_service.cart_books">
+                                <a  class="photo"><img [src]="item.image" class="cart-thumb" alt="" /></a>
+                                <h6><a >{{item.name}} </a></h6>
+                               <span class="price">{{item.price}}$</span>
+                            </li>
+                            
+                            
+                            <li class="total">
+                                <span class="pull-right"><strong>Total</strong>: $0.00</span>
+                                <a href="#" class="btn btn-cart" routerLink="/cart">Cart</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li  class=" dropdown nav-item">
+                        <a class="nav-link"  data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                          </svg></a>
+                          
+                          <span class="badge"  *ngIf="notifications">{{notifLenght}}</span>
+    
+                          <ul class="dropdown-menu " style="cursor: pointer;">
+                           
+                            <li class="list-group-item" *ngFor="let item of notifications" [ngStyle]="{'background-color': !item.seen ? '#73c7af' : '#ffffff'}" (click)="notifSeen(item)" >
+                             
+                                <a >{{item.notification}} </a>
+
+                               
+                             
+                               
+                            </li>
+                           
+                        </ul>
+                    </li>
+                    <li *ngIf="userService.user"   >
+                        <a *ngIf="userService.user.client.role=='client'" class="nav-link"  data-toggle="dropdown"><i class="ni ni-money-coins"></i>
+                            <span  style="color: white;" >{{userService.user.client.coins}}</span> </a>  </li>
+
+                    
+                    
+                    
+               
+              
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+ 
+    <router-outlet ></router-outlet>
+

@@ -1,0 +1,155 @@
+
+.badge{
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    right: 5px;
+    font-size: 10px;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    padding-top: 2px;
+    border-radius: 50px;
+    background: #777777;
+    color: white;
+  }
+
+  
+  ul.cart-list{
+      padding: 0 !important;
+      width: 250px !important;
+  }
+  
+  ul.cart-list > li{
+      position: relative;
+      border-bottom: solid 1px #efefef;
+      padding: 15px 15px 23px 15px !important;
+  }
+  
+  ul.cart-list > li > a.photo{
+      padding: 0 !important;
+      margin-right: 15px;
+      float: left;
+      display: block;
+      width: 50px;
+      height: 50px;
+      left: 15px;
+      top: 15px;
+  }
+  
+  ul.cart-list > li img{
+      width: 50px;
+      height: 50px;
+      border: solid 1px #efefef;
+  }
+  
+  ul.cart-list > li > h6{
+      margin: 0;
+  }
+  
+  ul.cart-list > li > h6 > a.photo{
+      padding: 0 !important;
+      display: block;
+  }
+  
+  ul.cart-list > li > p{
+      margin-bottom: 0;
+  }
+  
+  ul.cart-list > li.total{
+      background-color: #f5f5f5;
+      padding-bottom: 15px !important;
+  }
+  
+  ul.cart-list > li.total > .btn{
+      display: inline-block;
+      border-bottom: solid 1px #efefef !important;
+  }
+  
+  ul.cart-list > li .price{
+      font-weight: bold;
+  }
+  
+  ul.cart-list > li.total > span{
+      padding-top: 8px;
+  }
+  
+  .photo{
+    padding: 0 !important;
+    margin-right: 15px;
+    float: left;
+    display: block;
+    width: 50px;
+    height: 50px;
+    left: 15px;
+    top: 15px;
+    
+
+  }
+  
+  ul.cart-list > li > h6{
+    margin: 0;
+  }
+
+  
+
+ul.cat-List1{
+    padding: 0 !important;
+    width: 150px !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    :hover{
+        background-color: #cce6ff;
+        cursor: pointer;
+    }
+   
+    
+}
+
+ul.cat-List1 > li{
+    position: relative;
+    padding: 5px 5px 5px 5px !important;
+    
+}
+
+
+
+ul.cat-List1 > li img{
+    width: 50px;
+    height: 50px;
+    border: solid 1px #efefef;
+}
+
+ul.cat-List1 > li > h6{
+    margin: 0;
+}
+
+
+
+ul.cat-List1 > li > p{
+    margin-bottom: 0;
+    color:#9147FF
+}
+
+ul.cat-List1 > li.total{
+    background-color: #f5f5f5;
+    padding-bottom: 15px !important;
+}
+
+ul.cat-List1 > li.total > .btn{
+    display: inline-block;
+    border-bottom: solid 1px #efefef !important;
+}
+
+ul.cat-List1 > li .price{
+    font-weight: bold;
+}
+
+ul.cat-List1 > li.total > span{
+    padding-top: 8px;
+}
+
+
+
+ul.cat-List1 > li > h6{
+  margin: 0;
+}

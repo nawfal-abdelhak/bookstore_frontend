@@ -1,0 +1,157 @@
+<div class="container" style=" padding-top: 56px;">
+
+    <div class="row" style=" margin-top: 56px;">
+
+
+        <div class="col-2">
+            <div class="big_title">
+                List Name
+            </div>
+
+        </div>
+
+        <div class="col-3">
+            <button type="button" class="btn btn-outline-danger"
+                style="border-radius: 20px;font-size: 20px;padding-left: 17px;padding-right: 17px;">Edit</button>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-12"> Privacy settings</div>
+
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <select class="select">
+                <option style="background-color: white;" selected>Private</option>
+                <option style="background-color: white;" value="2">Public</option>
+
+            </select>
+        </div>
+
+        <div class="col-3 share">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-share-fill"
+                viewBox="0 0 16 16">
+                <path
+                    d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+            </svg> <span style="margin-left: 8px;">Share</span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-12 divider">
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div *ngFor="let item of book_service.wish_books;let i=index" class="col-lg-3 col-md-6 mb-4 image ">
+            <img style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;" class="imagee" [src]="item.image" alt="">
+            <div class="overlay">
+                <div style="background-color: #ffcccc;width: 180px;height: 200px;border-radius: 10px;margin-top: 30px; margin-left: 15px;">
+                    <div style="margin-left: 30px;">
+                        <div class="big_title1"> {{item.name}}</div>
+                        <span class="author">
+                            {{item.auteur.username}}:
+                        </span>
+                        <span class="card-text">(Author)</span>
+                        <div class="card-text">Price : $${{item.price}}</div>
+
+                        <div>
+                            <button type="button" class="btn btn-danger " (click)="addToCart(item.id,item,index,item.id)"
+                                style="border-radius: 20px;font-size: 10px;margin-right: 10px;"><i
+                                    class="fa fa-shopping-bag" style="margin: 5px;"></i>add to cart</button>
+                        </div>
+
+                        <div style="margin-left: 8px;" (click)="deleteItem(i,item.id)">
+                            <button type="button" class="btn btn btn-outline-warning "
+                                style="border-radius: 20px;font-size: 10px;margin-right: 10px;margin-top: 10px; padding: -3px;"><svg
+                                    style="margin-bottom: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                </svg>Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="card-text" style="font-size: 14px;">Added 04/12/21</div> -->
+        </div>
+
+        <!-- <div class="col-4">
+            <div class="big_title1">
+               {{item.name}}
+            </div>
+
+            <span class="author">
+                {{item.auteur.username}}
+            </span>
+            <span class="card-text">(Author)</span>
+
+            <div class="card-text">$${{item.price}}</div>
+
+            <div style="margin-top: 15px;margin-bottom:15px;display: flex;position: relative;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" color="#1FA5A3"
+                    class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+                <div class="available">available</div>
+            </div>
+        </div>
+        <div class="col-5 ">
+            <button type="button" class="btn btn-danger btn-block"
+                style="border-radius: 20px;font-size: 20px;margin-right: 10px;"><i class="fa fa-shopping-bag"
+                    style="margin: 5px;"></i>add to cart</button>
+
+            <button type="button" class="btn btn btn-outline-warning btn-block"
+                style="border-radius: 20px;font-size: 20px;margin-right: 10px;margin-top: 10px;"><svg
+                    style="margin-bottom: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>Delete</button>
+
+
+        </div> -->
+
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-12 divider">
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-3">
+            <button type="button" class="btn btn-danger btn-block"
+                style="border-radius: 20px;font-size: 20px;margin-right: 10px;margin-bottom: 10px;">Create new
+                WishList</button>
+        </div>
+    </div>
+
+
+    <!-- /.col-9 -->
+
+
+
+
+
+
+</div>

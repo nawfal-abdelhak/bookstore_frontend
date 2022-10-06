@@ -1,0 +1,116 @@
+/* enable absolute positioning */
+
+
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding-left: 25px;
+  pointer-events: none;
+  padding-top: 6px;
+ 
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.select{
+    padding: 4px;
+    margin: 6px;
+    background-color:#F7FAFC;
+    border-radius: 5px;
+    
+   
+}
+
+.page_number{
+  background-color:#9147FF ;
+}
+
+option:checked { color:#9147FF; }
+
+.pagination1{
+    border:#DEE2E6 solid 0.2px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+.pagination2{
+    border:#DEE2E6 solid 0.2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.pagination3{
+    border:#DEE2E6 solid 0.2px;
+}
+
+
+  .centered {
+    position: absolute;
+    top: 9%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+  }
+
+
+  .selected_genre{
+    background-color: #FFD9B0;
+  }
+
+
+//   .sidenav {
+//     height: 100%;
+//     width: 160px;
+//     position: fixed;
+//     z-index: 1;
+//     top: 0;
+//     left: 0;
+//     background-color: #111;
+//     overflow-x: hidden;
+//     padding-top: 20px;
+//   }
+//   .sidenav a {
+//     padding: 6px 8px 6px 16px;
+//     text-decoration: none;
+//     font-size: 25px;
+//     color: #818181;
+//     display: block;
+//   }
+
+.title{
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footers a {color:#696969;}
+.footers p {color:#696969;}
+.footers ul {line-height:30px;}
+#social-fb:hover {
+     color: #3B5998;
+     transition:all .001s;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+     transition:all .001s;
+ }
+ #social-gp:hover {
+     color: #d34836;
+     transition:all .001s;
+ }
+ #social-em:hover {
+     color: #f39c12;
+     transition:all .001s;
+ }
+
+
